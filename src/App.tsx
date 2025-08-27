@@ -25,7 +25,8 @@ export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>(todosFromServer);
   const [title, setTitle] = useState('');
   const [userId, setUserId] = useState('');
-  const [showErrors, setShowErrors] = useState(false);
+  const [titleError, setTitleError] = useState('');
+  const [userError, setUserError] = useState('');
 
   const users = usersFromServer as User[];
 
@@ -43,12 +44,20 @@ export const App: React.FC = () => {
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = event => {
     event.preventDefault();
-    setShowErrors(true);
 
-    const isTitleValid = title.trim().length > 0;
-    const isUserValid = userId !== '';
+    let valid = true;
 
-    if (!isTitleValid || !isUserValid) {
+    if (title.trim().length === 0) {
+      setTitleError('Please enter a title');
+      valid = false;
+    }
+
+    if (userId === '') {
+      setUserError('Please choose a user');
+      valid = false;
+    }
+
+    if (!valid) {
       return;
     }
 
@@ -68,12 +77,9 @@ export const App: React.FC = () => {
     setTodos(prev => [...prev, newTodo]);
     setTitle('');
     setUserId('');
-    setShowErrors(false);
+    setTitleError('');
+    setUserError('');
   };
-
-  const titleError =
-    showErrors && title.trim().length === 0 ? 'Please enter a title' : '';
-  const userError = showErrors && userId === '' ? 'Please choose a user' : '';
 
   return (
     <div className="App">
@@ -90,11 +96,8 @@ export const App: React.FC = () => {
             value={title}
             onChange={e => {
               setTitle(e.target.value);
-              if (showErrors) {
-                // hide errors on change
-                if (titleError) {
-                  setShowErrors(false);
-                }
+              if (titleError && e.target.value.trim() !== '') {
+                setTitleError('');
               }
             }}
           />
@@ -109,10 +112,8 @@ export const App: React.FC = () => {
             value={userId}
             onChange={e => {
               setUserId(e.target.value);
-              if (showErrors) {
-                if (userError) {
-                  setShowErrors(false);
-                }
+              if (userError && e.target.value !== '') {
+                setUserError('');
               }
             }}
           >
