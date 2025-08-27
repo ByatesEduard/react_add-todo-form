@@ -1,39 +1,39 @@
 # React Add TODO Form
 
-Реалізуйте можливість додавати TODO до `TodoList`, реалізованого в завданні **Static List of TODOs**.
+Implement the ability to add TODOs to the `TodoList` implemented in the **Static List of TODOs**
 
-> Ось [приклад роботи застосунку](https://mate-academy.github.io/react_add-todo-form/)
+> Here is [the working example](https://mate-academy.github.io/react_add-todo-form/)
 
-1. Створіть компонент `App`, який зберігатиме масив `todos` і відображатиме його за допомогою `TodoList`.
-1. Створіть форму для додавання нових TODO:
+1. Create an `App` component storing the `todos` array and displaying it using the `TodoList`.
+1. Create a form to add new TODOs:
 
-- додайте текстове поле для `title` з атрибутом `data-cy="titleInput"`;
-- додайте `<select>` з атрибутом `data-cy="userSelect"`, який показує всіх наданих користувачів;
-- додайте підписи (labels) і підказки (placeholders) там, де це потрібно;
-- після натискання кнопки `Add` додавайте новий todo до списку;
-- кожен TODO має містити поля:
+- there should be a text input for the `title` with `data-cy="titleInput"` attribute;
+- add a `<select>` with `data-cy="userSelect"` attribute showing all the given users;
+- add labels and placeholders where they are needed;
+- add a new todo to the list after clicking the `Add` button;
+- each TODO item must have the following fields:
   - `id`,
   - `title`,
   - `userId`,
-  - `completed` (`false` за замовчуванням),
-  - а також об’єкт `user`, що містить: `id`, `name`, `username`, `email`;
-- `id` — це найбільший `id` у масиві + 1 (додайте атрибут `data-id={todo.id}` для кожного `.TodoInfo`).
+  - completed (`false` by default),
+  - and a user object containing: `id`, `name`, `username`, `email`
+- `id` is the largest `id` in the array + 1 (add `data-id={todo.id}` attribute to each `.TodoInfo`).
 
-1. Додайте валідацію форми:
+1. Add validation to the form:
 
-- додайте до `select` порожній варіант за замовчуванням `Choose a user`;
-- перед створенням todo перевіряйте, чи вибрано `user`; якщо ні — показуйте повідомлення про помилку біля `select` (`Please choose a user`);
-- якщо поле `title` порожнє — показуйте повідомлення про помилку біля поля `title` (`Please enter a title`);
-- помилки мають з’являтися лише після натискання кнопки `Add`;
-- ховайте повідомлення одразу після будь-якої зміни поля з помилкою.
+- add a default empty option `Choose a user` to the select;
+- before creating a todo, check if a `user` was selected; if not, show an error message next to the `select` (`Please choose a user`);
+- if the `title` is empty, show an error message next to the `title` field (`Please enter a title`);
+- errors should appear only after clicking the `Add` button;
+- hide the message immediately after any change of the field with an error;
 
-1. Якщо форма валідна — додайте todo до списку та очистьте форму.
-1. (необов’язково) Дозвольте вводити в `title` лише літери (`ua` і `en`), цифри та пробіли. Просто видаляйте інші символи з `title`.
+1. If the form is valid, add a todo to the list and clear the form.
+1. (\* **Optional**) Allow entering only letters (`ua` and `en`), digits, and `spaces` in the `title` field. Just remove any other characters from the `title`.
 
-## Інструкції
+## Instructions
 
-- Встановіть розширення Prettier та використайте ці [налаштування VSCode](https://mate-academy.github.io/fe-program/tools/vscode/settings.json) для форматування під час збереження.
-- Реалізуйте розв’язок відповідно до [гайдлайну по React задачам](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
-- Користуйтеся [шпаргалкою з React TypeScript](https://mate-academy.github.io/fe-program/js/extra/react-typescript).
-- В окремому терміналі запустіть тести командою `npm test`, щоб переконатися, що рішення коректне.
-- Замініть `<your_account>` на ваш GitHub юзернейм у [DEMO LINK](https://<your_account>.github.io/react_add-todo-form/) і додайте посилання до опису PR.
+- Install Prettier Extention and use this [VSCode settings](https://mate-academy.github.io/fe-program/tools/vscode/settings.json) to enable format on save.
+- Implement a solution following the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
+- Use the [React TypeScript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript).
+- Open one more terminal and run tests with `npm test` to ensure your solution is correct.
+- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_add-todo-form/) and add it to the PR description.

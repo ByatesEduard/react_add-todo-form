@@ -42,6 +42,19 @@ export const App: React.FC = () => {
     [todos],
   );
 
+  // універсальна функція для оновлення значення і очищення помилок
+  const handleFieldChange = (
+    value: string,
+    setValue: React.Dispatch<React.SetStateAction<string>>,
+    error: string,
+    setError: React.Dispatch<React.SetStateAction<string>>,
+  ) => {
+    setValue(value);
+    if (error && value.trim() !== '') {
+      setError('');
+    }
+  };
+
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = event => {
     event.preventDefault();
 
@@ -94,12 +107,14 @@ export const App: React.FC = () => {
             data-cy="titleInput"
             placeholder="Enter a todo title"
             value={title}
-            onChange={e => {
-              setTitle(e.target.value);
-              if (titleError && e.target.value.trim() !== '') {
-                setTitleError('');
-              }
-            }}
+            onChange={e =>
+              handleFieldChange(
+                e.target.value,
+                setTitle,
+                titleError,
+                setTitleError,
+              )
+            }
           />
           {titleError && <div className="error">{titleError}</div>}
         </div>
@@ -110,12 +125,14 @@ export const App: React.FC = () => {
             id="user"
             data-cy="userSelect"
             value={userId}
-            onChange={e => {
-              setUserId(e.target.value);
-              if (userError && e.target.value !== '') {
-                setUserError('');
-              }
-            }}
+            onChange={e =>
+              handleFieldChange(
+                e.target.value,
+                setUserId,
+                userError,
+                setUserError,
+              )
+            }
           >
             <option value="">Choose a user</option>
             {users.map(u => (
